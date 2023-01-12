@@ -21,9 +21,17 @@ def the_callback(ws):
         ws.send(body.decode("utf-8"))
     return callback
 
-@sock.route('/echo')
-def echo(ws):
+@sock.route('/user1')
+def ws_for_user1(ws):
     routing_key = "user1"
+    channel.queue_bind(exchange="direct_logs", queue=queue_name, routing_key=routing_key)
+    channel.basic_consume(queue=queue_name, on_message_callback=the_callback(ws), auto_ack=True)
+    channel.start_consuming()
+
+
+@sock.route('/user2')
+def ws_for_user2(ws):
+    routing_key = "user2"
     channel.queue_bind(exchange="direct_logs", queue=queue_name, routing_key=routing_key)
     channel.basic_consume(queue=queue_name, on_message_callback=the_callback(ws), auto_ack=True)
     channel.start_consuming()
