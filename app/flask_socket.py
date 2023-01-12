@@ -3,8 +3,6 @@
 from flask_sock import Sock
 from flask import Flask, render_template, request
 import pika
-from typing import Dict, List
-from dataclasses import dataclass
 
 app = Flask(__name__)
 sock = Sock(app)

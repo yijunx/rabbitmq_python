@@ -1,18 +1,14 @@
 <!doctype html>
 <html>
   <head>
-    <title>Flask-Sock Demo</title>
+    <title>play with sockets</title>
   </head>
   <body>
-    <h1>Flask-Sock Demo</h1>
+    <h1>Events</h1>
     <div id="events_user1"></div>
     <hr/>
     <div id="events_user2"></div>
     <br>
-    <!-- <form id="form">
-      <label for="text">Input: </label>
-      <input type="text" id="text" autofocus>
-    </form> -->
     <script>
       const log_user1 = (text, color) => {
         document.getElementById('events_user1').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
@@ -21,16 +17,16 @@
         document.getElementById('events_user2').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
       };
 
-      // const socket_x_1 = new WebSocket('ws://' + location.host + '/direct_exchange/user1');
-      // const socket_x_2 = new WebSocket('ws://' + location.host + '/direct_exchange/user2');
-      // socket_x_1.addEventListener('message', ev => {
-      //   log_user1('user1 has event (X): ' + ev.data, 'blue');
-      // });
-      // socket_x_2.addEventListener('message', ev => {
-      //   log_user2('user2 has event (X):' + ev.data, 'blue');
-      // });
-      var authToken = 'R3YKZFKBVi';
+      const socket_x_1 = new WebSocket('ws://' + location.host + '/direct_exchange/user1');
+      const socket_x_2 = new WebSocket('ws://' + location.host + '/direct_exchange/user2');
+      socket_x_1.addEventListener('message', ev => {
+        log_user1('user1 has event (X): ' + ev.data, 'blue');
+      });
+      socket_x_2.addEventListener('message', ev => {
+        log_user2('user2 has event (X):' + ev.data, 'blue');
+      });
 
+      var authToken = 'R3YKZFKBVi';
       document.cookie = 'X-Authorization=' + authToken + '; path=/';
 
       const socket_q_1 = new WebSocket('ws://' + location.host + '/queue/user1');
