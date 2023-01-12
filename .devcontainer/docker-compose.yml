@@ -15,6 +15,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+    # the 15672 username/password is both guest
     ports:
         - 5672:5672
         - 15672:15672
